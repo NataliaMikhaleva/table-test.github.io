@@ -14,12 +14,12 @@ function Table(props) {
     let sortableData = [...data];
     if (sortConfig !== null) {
       sortableData.sort((a, b) => {
-        console.log("!");
+        
         if (a[sortConfig.key] < b[sortConfig.key]) {
           return sortConfig.direction === "increase" ? -1 : 1;
         }
         if (a[sortConfig.key] > b[sortConfig.key]) {
-          console.log("!!");
+          
           return sortConfig.direction === "increase" ? 1 : -1;
         }
         return 0;
@@ -38,8 +38,13 @@ function Table(props) {
       direction = "decrease";
     }
     setSortConfig({ key, direction });
-    console.log(sortConfig);
   };
+
+
+  //функция, передающая item в App.js для изменения стейта isRowSelected
+  // function handleClick(item) {
+  //   props.handleRowClick(item)
+  // }
 
   return (
     <table className="table table-striped table-bordered">
@@ -64,7 +69,7 @@ function Table(props) {
       </thead>
       <tbody>
         {sortedData.map((item) => (
-          <tr key={item.id + item.phone}>
+          <tr key={item.id + item.phone} onClick={() => props.handleRowClick(item)}>
             <td>{item.id}</td>
             <td>{item.firstName}</td>
             <td>{item.lastName}</td>
