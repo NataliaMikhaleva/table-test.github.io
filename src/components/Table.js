@@ -14,12 +14,10 @@ function Table(props) {
     let sortableData = [...data];
     if (sortConfig !== null) {
       sortableData.sort((a, b) => {
-        
         if (a[sortConfig.key] < b[sortConfig.key]) {
           return sortConfig.direction === "increase" ? -1 : 1;
         }
         if (a[sortConfig.key] > b[sortConfig.key]) {
-          
           return sortConfig.direction === "increase" ? 1 : -1;
         }
         return 0;
@@ -39,14 +37,8 @@ function Table(props) {
     }
     setSortConfig({ key, direction });
   };
-
-
-  //функция, передающая item в App.js для изменения стейта isRowSelected
-  // function handleClick(item) {
-  //   props.handleRowClick(item)
-  // }
-
   return (
+    <>
     <table className="table table-striped table-bordered">
       <thead>
         <tr>
@@ -69,7 +61,10 @@ function Table(props) {
       </thead>
       <tbody>
         {sortedData.map((item) => (
-          <tr key={item.id + item.phone} onClick={() => props.handleRowClick(item)}>
+          <tr
+            key={item.id + item.phone}
+            onClick={() => props.handleRowClick(item)}
+          >
             <td>{item.id}</td>
             <td>{item.firstName}</td>
             <td>{item.lastName}</td>
@@ -77,8 +72,39 @@ function Table(props) {
             <td>{item.phone}</td>
           </tr>
         ))}
+       
       </tbody>
     </table>
+     <nav aria-label="Page navigation example">
+     <ul className="pagination justify-content-center">
+       <li className="page-item disabled">
+         <a className="page-link" href="#" tabIndex="-1" aria-disabled="true">
+           Previous
+         </a>
+       </li>
+       <li className="page-item">
+         <a className="page-link" href="#">
+           1
+         </a>
+       </li>
+       <li className="page-item">
+         <a className="page-link" href="#">
+           2
+         </a>
+       </li>
+       <li className="page-item">
+         <a className="page-link" href="#">
+           3
+         </a>
+       </li>
+       <li className="page-item">
+         <a className="page-link" href="#">
+           Next
+         </a>
+       </li>
+     </ul>
+   </nav>
+   </>
   );
 }
 
